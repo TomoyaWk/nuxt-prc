@@ -1,36 +1,47 @@
 <template>
-  <div class="container">
-    <div>
-      <Logo />
-      <h1 class="title">
-        nuxt-prc
-      </h1>
-      <div class="links">
-        <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="button--green"
-        >
-          Documentation
-        </a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="button--grey"
-        >
-          GitHub
-        </a>
-      </div>
+<div class="column is-10">
+  <section class="card">
+    <div class="card-header">
+      <h1 class="card-header-title title is-1">{{ title }}</h1>
+    
     </div>
-  </div>
+    <div class="card-content">
+      <p>{{ message }}</p>
+      <hr>
+      <pre> {{ clock }}</pre>
+
+      <router-link to="/other">to OtherPage</router-link>
+    </div>
+    
+  </section>
+</div>
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
+import Vue from "vue";
 
-export default Vue.extend({})
+interface Data {
+      title : string,
+      message: string,
+      clock : string,
+}
+
+export default Vue.extend({
+  data() : Data {
+    return {
+      title : "hello!",
+      message: "message is here",
+      clock : "please wait.....",
+    }
+  },
+  created : function() {
+    setInterval( () => {
+      var d : any = new Date();
+      this.clock = d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds();
+    }, 1000)
+  }
+
+});
 </script>
 
 <style>
@@ -44,16 +55,8 @@ export default Vue.extend({})
 }
 
 .title {
-  font-family:
-    'Quicksand',
-    'Source Sans Pro',
-    -apple-system,
-    BlinkMacSystemFont,
-    'Segoe UI',
-    Roboto,
-    'Helvetica Neue',
-    Arial,
-    sans-serif;
+  font-family: "Quicksand", "Source Sans Pro", -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   display: block;
   font-weight: 300;
   font-size: 100px;
