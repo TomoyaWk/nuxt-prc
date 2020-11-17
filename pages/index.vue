@@ -6,6 +6,9 @@
     
     </div>
     <div class="card-content">
+      <button @click="$store.commit('count')">click!</button>
+      <button @click="$store.commit('reset')">reset!</button>
+      <p> clicked :{{ $store.state.counter }}</p>
       <p>{{ message }}</p>
       <hr>
       <pre> {{ clock }}</pre>
@@ -30,18 +33,25 @@ export default Vue.extend({
   data() : Data {
     return {
       title : "hello!",
-      message: "message is here",
+      message: this.$store.state.message,
       clock : "please wait.....",
     }
   },
   created : function() {
     setInterval( () => {
       var d : any = new Date();
-      this.clock = d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds();
+      var time = {
+        'hour' : d.getHours(),
+        'minite' : d.getMinutes(),
+        'second' : d.getSeconds()
+      };
+
+      this.clock =  ("00" + time.hour ).slice(-2) + ":" + ("00" + time.minite ).slice(-2) + ":" + ("00" + time.second ).slice(-2);
     }, 1000)
   }
-
 });
+
+
 </script>
 
 <style>
