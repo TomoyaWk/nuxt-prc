@@ -6,9 +6,6 @@
     
     </div>
     <div class="card-content">
-      <button @click="$store.commit('count')">click!</button>
-      <button @click="$store.commit('reset')">reset!</button>
-      <p> clicked :{{ $store.state.counter }}</p>
       <p>{{ message }}</p>
       <hr>
       <pre> {{ clock }}</pre>
